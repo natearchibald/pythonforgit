@@ -5,7 +5,7 @@ import time
 from ping_handler2 import PingTools
 import re
 import os
-ms_under_100 = re.compile(r'=\d{2}\.?\d?\s')
+ms_under_100 = re.compile(r'=\d{2}\.?\d?\s')  # like '=22.2 ms' or '=22 ms'
 ms_100_200 = re.compile(r'=1[\d]{2}\.?\d?\s')
 ms_200_500 = re.compile(r'=[2-4]\d{2}\.?\d?\s')
 ms_500_1000 = re.compile(r'=[5-9][\d]{2}\.?\d?\s')
@@ -50,9 +50,10 @@ class UploadFileHandler(tornado.web.RequestHandler):
         all100 = results1[1]/allcount
         all100 = all100*100
         all100 = '%.2f' % all100
-        # under make file true
+        
         if results1[1] != 0 and results2[1] != 0 and results3[1] != 0 and results4[1] != 0 and results5[1] != 0:
-            result_under_100 = results1[0]/results1[1]
+            
+            result_under_100 = results1[0]/results1[1]  # this line have bug,if results[1] value is zero...
             result_100_200 = results2[0]/results2[1]
             result_200_500 =  results3[0]/results3[1]
             result_500_1000 =  results4[0]/results4[1]
@@ -83,8 +84,8 @@ class UploadFileHandler(tornado.web.RequestHandler):
 
 
 settings = {
-    "static_path": os.path.join(os.path.dirname(__file__), "static"),
-    "debug": True,
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),  # use static path,for bootstrap framework
+    "debug": True,  # auto reload
 }
 application = tornado.web.Application([
     (r"/upload", UploadFileHandler),
