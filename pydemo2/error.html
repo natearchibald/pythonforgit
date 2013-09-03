@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>error</title>
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+        .container{
+            text-align: center;
+            margin-top: 10%;
+        }
+        #sfooter{
+            margin-top: 20%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>你懂得</h3>
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>出错了!</strong> 统计数据中包含项数为0的数据项，被除数不能为0!
+    </div>
+
+
+    请<a href="/static/ping_model.xlsx"> 点此下载 </a>excel模板解决此问题.
+    <p></p>
+    或点击 <a href='/upload'>这里</a> 继续上传其他文件.
+    <p></p>
+    <span class="label label-important" id="sfooter">write by @庄雅婷</span>
+</div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

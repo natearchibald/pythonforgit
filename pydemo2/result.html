@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>result page</title>
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+        .container{
+            text-align: center;
+        }
+        #pfooter{
+            margin-bottom: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Statistical Success!</h3>
+        <hr>
+
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            以下为统计数据(针对刚上传的文件)：<strong> {{ filenames }} </strong>
+        </div>
+
+
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>样本数(项)</th>
+                    <th>平均延时(ms)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> 0 ~ 100ms</td>
+                    <td> {{ under100count }} 项</td>
+                    <td> {{ under100avg }} ms </td>
+                </tr>
+                <tr>
+                    <td>100 ~ 200ms</td>
+                    <td> {{ count100_200 }} 项</td>
+                    <td> {{ avg100_200 }} ms </td>
+                </tr>
+                <tr>
+                    <td>200 ~ 500ms</td>
+                    <td> {{ count200_500 }} 项</td>
+                    <td> {{ avg200_500 }} ms </td>
+                </tr>
+                <tr>
+                    <td>500 ~ 1000ms</td>
+                    <td> {{ count500_1000 }} 项</td>
+                    <td> {{ avg500_1000 }} ms </td>
+                </tr>
+                <tr>
+                    <td>above 1000ms</td>
+                    <td> {{ count_1k }} 项</td>
+                    <td> {{ avg_1k }} ms </td>
+                </tr>
+                <tr>
+                    <td>所有时间段</td>
+                    <td> {{ allcounts }} 项</td>
+                    <td> {{ avgtimess }} ms </td>
+                </tr>
+                <tr class="warning">
+                    <td>0 ~ 100ms区间段项/总项数</td>
+                    <td> {{ all100s }} % </td>
+                    <td> # </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p id="pfooter">点击 <a href='/upload'>这里</a> 继续上传</p>
+        <span class="label label-important">write by @庄雅婷</span>
+    </div>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>上传ping文件</title>
+        <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <style>
+            .container{
+                text-align: center;
+
+            }
+            form{
+                margin-top: 5%;
+                margin-bottom: 5%;
+
+            }
+            #progress1{
+                width: 50%;
+                margin: 0 auto;
+                text-align: center;
+                margin-top: 5%;
+                margin-bottom: 12%;
+            }
+            #filenamediv{
+
+                width: 50%;
+                margin: 0 auto;
+                margin-top: 5%;
+            }
+        </style>
+    </head>
+    <body>
+        <blockquote>
+            <h2>Simplify your life!</h2>
+            <small>Upload ping file and <cite title="Source Title"> Statistical It! </cite></small>
+        </blockquote>
+        <div class="container">
+
+        <div class="alert alert-success" id="filenamediv">
+            <h5>File Name: </h5><span id="span1"></span>
+        </div>
+
+
+        <!--begin form-->
+        <form action="/upload" enctype="multipart/form-data" method="post" name="test_form">
+            <input id="inputWarning" name="upl" type="file" required="required" style="display:none;"><p><p>
+            <input type=button onclick="fn_browse();" class="btn" value="Browse PingFile...">&nbsp;
+            <input type="submit" class="btn btn-success" value="Upload">&nbsp;
+            <input type="reset" class="btn btn-danger" value="Reset" id="resetbtn" onclick="flush_browse();">
+        </form>
+
+
+
+        <p>The following is the progress bar.</p>
+        <div class="progress progress-striped active" id="progress1">
+                <div class="bar" id="bar1">
+                </div>
+        </div>
+
+        <span class="label label-important">write by @庄雅婷</span>
+    </div>
+    <!--begin javascript-->
+    <script>
+        function up(fd) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST','/upload',true);
+            xhr.upload.onprogress=function (ev) {
+                var percent = 0;
+                if(ev.lengthComputable) {
+                    percent = 110 * ev.loaded/ev.total;
+                    document.getElementById('bar1').style.width = percent + '%';
+                }
+            }
+            xhr.send(fd);
+        }
+
+        document.getElementsByTagName('input')[0].onchange = function() {
+            var fd = new FormData();
+            var filename = document.getElementById("inputWarning").value
+
+
+            fd.append(this.name,this.files[0]);
+            document.getElementById("span1").innerHTML = filename
+            up(fd);
+
+            }
+
+         function fn_browse(){
+            document.test_form.upl.click();
+
+        }
+
+        function flush_browse(){
+            document.getElementById('bar1').style.width = 0 + '%';
+            var obj = document.getElementById("inputWarning");
+            obj.outerHTML = obj.outerHTML;
+            document.getElementById("inputWarning").value="";
+            document.getElementById("span1").innerHTML = "";
+        }
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+
+    </body>
+</html>

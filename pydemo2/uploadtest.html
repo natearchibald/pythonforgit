@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML5</title>
+<meta charset="utf-8" />
+<link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+</head>
+    <body>
+        
+        <form action="/upload" enctype="multipart/form-data" method="post">
+            <input type="file" name="upl">
+            <input type="submit">
+        </form>
+
+        <div class="progress" id="progress">
+            <div class="bar" id="bar">
+
+            </div>
+        </div>
+    <script>
+        function up(fd) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST','/upload',true);
+            xhr.upload.onprogress=function (ev) {
+                var percent = 0;
+                if(ev.lengthComputable) {
+                    percent = 110 * ev.loaded/ev.total;
+                    document.getElementById('bar').style.width = percent + '%';
+                }
+            }
+            xhr.send(fd);
+        }
+
+        document.getElementsByTagName('input')[0].onchange = function() {
+            var fd = new FormData();
+            fd.append(this.name,this.files[0]);
+            up(fd);
+
+        }
+    </script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+	</body>
+</html>
